@@ -6,15 +6,12 @@ import {
 } from "./actionTypes";
 import { combineReducers } from "redux";
 
-const initialState = {
-  user: null,
-  posts: []
-};
+function user(state = {}, action) {
 
-function user(state = null, action) {
   switch (action.type) {
     case REGISTER_ACTION:
     case LOGIN_ACTION:
+      console.log("user " + action.payload.username)
       const user = action.payload;
       return { username: user.username } ;
     default:
@@ -22,15 +19,16 @@ function user(state = null, action) {
   }
 }
 
-function posts(state = [], action) {
+function posts(state = [{author:'Test author', text:'Test text'}], action) {
   switch (action.type) {
     case ADD_POST_ACTION:
     case INCOMING_POST_ACTION:
       const post = action.payload;
-      return [post, ...state.posts];
+      return [post, ...state];
     default:
       return state;
   }
+  
 }
 
 export default combineReducers({user, posts});

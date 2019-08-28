@@ -1,4 +1,4 @@
-import {REGISTER_ACTION, LOGIN_ACTION} from './actionTypes';
+import {REGISTER_ACTION, LOGIN_ACTION, ADD_POST_ACTION} from './actionTypes';
 
 export function register(userName, password) {
     return {
@@ -16,6 +16,15 @@ export function login(userName, password) {
         payload: {
             username:userName,
             password:password
+        }
+    }
+}
+
+export function post(author, text) {
+    return {
+        type: ADD_POST_ACTION,
+        payload: {
+            author, text
         }
     }
 }

@@ -7,6 +7,9 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
 export default function PostDialog(props) {
+
+  const [postText, setPostText] = React.useState("");
+
   return (
     <div>
       <Dialog
@@ -19,6 +22,8 @@ export default function PostDialog(props) {
           <TextField
             autoFocus
             margin="dense"
+            value={postText}
+            onChange={(e) =>{setPostText(e.currentTarget.value)}}
             id="post"
             fullWidth
           />
@@ -27,7 +32,7 @@ export default function PostDialog(props) {
           <Button onClick={props.handleClose} color="primary" id="cancel">
             Cancel
           </Button>
-          <Button onClick={props.handleClose} color="primary" id="post">
+          <Button onClick={(e) =>props.handleClose(e, postText)} color="primary" id="post">
             Post
           </Button>
         </DialogActions>

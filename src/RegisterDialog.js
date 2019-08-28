@@ -7,7 +7,6 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
 export default function RegisterDialog(props) {
-  console.log(props);
 
   const [username, setUsername] = React.useState("")
   const [password, setPassword] = React.useState("")
