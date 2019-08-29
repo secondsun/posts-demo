@@ -7,8 +7,8 @@ import AddIcon from "@material-ui/icons/Add";
 import PostDialog from "./PostDialog";
 import RegisterDialog from "./RegisterDialog";
 import { createStore } from "redux";
-import postApp from "./redux/reducer";
-import { register, login, post,  } from './redux/actions'
+import postApp from "../ui/src/redux/reducer";
+import { register, login, post,  } from './src/redux/actions'
 const store = createStore(postApp);
 
 function App() {
@@ -35,8 +35,10 @@ function App() {
       case "register":
           return store.dispatch(register(arguments[1],arguments[2]))
       case "post":
-      case "cancel":
           return store.dispatch( post(state.user.username, arguments[1]));
+      case "cancel":
+          setAddPostOpen(false)
+          return;
     }
   }
 
