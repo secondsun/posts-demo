@@ -19,7 +19,7 @@ function user(state = {}, action) {
   }
 }
 
-function filter(state = null, action) {
+function filter(state = "", action) {
   switch (action.type) {
     case FILTER_ACTION:
         return action.payload;
