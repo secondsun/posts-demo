@@ -12,7 +12,7 @@ import PostDialog from "./PostDialog";
 import RegisterDialog from "./RegisterDialog";
 import { createStore, applyMiddleware } from "redux";
 import postApp from "./redux/reducer";
-import { register, login, post, fetchPosts, filter } from "./redux/actions";
+import { register, login, post, fetchPosts, filter, registerWebPush } from "./redux/actions";
 import FilterDialog from "./FilterDialog";
 const store = createStore(postApp, applyMiddleware(thunkMiddleware));
 store.dispatch(fetchPosts());
@@ -23,6 +23,7 @@ function App() {
     store.getState().user.username == null
   );
   const [posts, setPosts] = React.useState(store.getState().posts);
+  const [push, setPush] = React.useState(store.getState().push);
 
   var currentFilter = store.getState().filter;
 
@@ -32,6 +33,7 @@ function App() {
     setLoginOpen(!state.user.username);
     setAddPostOpen(false);
     setPosts(state.posts);
+    setPush(state.push);
     if (state.filter !== currentFilter) {
       currentFilter = state.filter;
       if (currentFilter.startsWith("#")) {
@@ -48,6 +50,8 @@ function App() {
     const state = store.getState();
     console.log(state);
     switch (e.currentTarget.id) {
+      case "unregister":
+        return store.dispatch(registerWebPush(false));
       case "login":
         return store.dispatch(login(arguments[1], arguments[2]));
       case "register":
@@ -76,6 +80,12 @@ function App() {
           <ListItem button>
             <ListItemText primary="Filter" onClick={()=>setFilterOpen(true)} />
           </ListItem>
+          {!push.enabled && <ListItem button>
+            <ListItemText primary="Enable Push" onClick={()=>store.dispatch(registerWebPush(true))} />
+          </ListItem>}
+          {push.enabled && <ListItem button>
+            <ListItemText primary="Disable Push" onClick={()=>store.dispatch(registerWebPush(false))} />
+          </ListItem>}
         </List>
       </div>
       <Feed posts={posts} />

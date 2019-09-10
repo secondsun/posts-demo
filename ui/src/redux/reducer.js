@@ -2,16 +2,26 @@ import {
   LOGIN_ACTION,
   REGISTER_ACTION,
   ADD_POST_ACTION,
+  REGISTER_WEB_PUSH,
   INCOMING_POST_ACTION, FILTER_ACTION
 } from "./actionTypes";
 import { combineReducers } from "redux";
+
+function push(state = {enabled:false}, action) {
+  switch(action.type) {
+    case REGISTER_WEB_PUSH: 
+    console.log("registering push " + action.payload.enabled)
+      return {enabled:action.payload.enabled}
+    default:
+      return state;
+  }
+}
 
 function user(state = {}, action) {
 
   switch (action.type) {
     case REGISTER_ACTION:
     case LOGIN_ACTION:
-      console.log("user " + action.payload.username)
       const user = action.payload;
       return { username: user.username } ;
     default:
@@ -43,4 +53,4 @@ function posts(state = [], action) {
   
 }
 
-export default combineReducers({user, posts, filter});
+export default combineReducers({user, posts, filter, push});
