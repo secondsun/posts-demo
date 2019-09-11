@@ -40,7 +40,7 @@ export function registerWebPush(enable) {
         }
 
         console.log("registering");
-        return navigator.serviceWorker.register("/service-worker-custom.js").then(
+        return navigator.serviceWorker.register("/service-worker.js").then(
           function(registration) {
             console.log(registration)
             if (!enable) {
