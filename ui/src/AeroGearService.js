@@ -1,17 +1,16 @@
 /* eslint-disable no-console */
 import { PushRegistration } from "@aerogear/push"
 import { ConfigurationService } from "@aerogear/core";
-import { init } from "@aerogear/app";
-import {
-    createClient
-} from '@aerogear/voyager-client';
-import gql from 'graphql-tag';
+
 
 class AeroGearService {
-
+     
 
     constructor() {
-        const validConfig ={
+        
+        this.register = this.register.bind(this);
+
+        this.validConfig = {
             "version": 1,
             "namespace": "devnexus-mobile",
             "clientId": "devnexus-client",
@@ -31,13 +30,12 @@ class AeroGearService {
                   }
             ]
         };
-        this.register = this.register.bind(this);
-
-        const config = new ConfigurationService(validConfig);        
+            
     }
 
     async register() {
-        const registration = new PushRegistrationWebpushImpl(config);
+        const config = new ConfigurationService(this.validConfig);    
+        const registration = new PushRegistration(config);
         await registration.register();
     }
 

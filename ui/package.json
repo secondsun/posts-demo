@@ -3,8 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@aerogear/core": "file:../../../aerogear/aerogear-js-sdk/packages/core",
+    "@aerogear/push": "file:../../../aerogear/aerogear-js-sdk/packages/push",
     "@material-ui/core": "^4.3.3",
     "@material-ui/icons": "^4.2.1",
+    "base-64": "^0.1.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-redux": "^7.1.1",

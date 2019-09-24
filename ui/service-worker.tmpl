@@ -111,7 +111,7 @@ self.addEventListener('notificationclick', function(event) {
 });
 
 self.addEventListener('install', function(event) {
-    conole.log('installing');
+    console.log('installing');
   event.waitUntil(
     caches.open(cacheName).then(function(cache) {
       return setOfCachedUrls(cache).then(function(cachedUrls) {
